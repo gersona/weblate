@@ -54,7 +54,7 @@ class SuggestionManager(models.Manager["Suggestion"]):
         import logging
 
         log = logging.getLogger(__name__)
-        log.error("###################")
+        log.error("##################")
         log.error(unit.translated)
         log.error(unit.target)
         log.error(target_merged)
