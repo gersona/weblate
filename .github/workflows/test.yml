@@ -111,7 +111,7 @@ jobs:
     # uv run --no-sources --all-extras pytest weblate/trans/tests/test_models.py -k ProjectTest --junitxml=junit.xml --cov=weblate weblate
       run: |
         source .venv/bin/activate
-        uv run ./manage.py test weblate.trans.tests.test_models.ProjectTest.test_add_suggestion_validation -v 2
+        for i in {1..10}; do uv run --no-sources --all-extras pytest weblate/trans/tests/test_models.py -k test_add_suggestion_validation --junitxml=junit.xml --cov=weblate weblate; done
       # cp .coverage .coverage.pytest
     - name: Test wsgi startup
       env:
