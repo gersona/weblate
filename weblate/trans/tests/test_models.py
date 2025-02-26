@@ -4,6 +4,7 @@
 
 """Test for translation models."""
 
+import logging
 import os
 from datetime import timedelta
 
@@ -37,6 +38,8 @@ from weblate.trans.tests.utils import (
 from weblate.utils.django_hacks import immediate_on_commit, immediate_on_commit_leave
 from weblate.utils.files import remove_tree
 from weblate.utils.state import STATE_TRANSLATED
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 def fixup_languages_seq() -> None:
@@ -149,6 +152,8 @@ class ProjectTest(RepoTestCase):
         component.project.delete()
 
     def test_add_suggestion_validation(self) -> None:
+        log = logging.getLogger("gersona_debug")
+        log.debug("hey hey hey")
         with transaction.atomic():
             component = self.create_po(
                 suggestion_voting=True, suggestion_autoaccept=True

@@ -4,6 +4,7 @@
 
 from __future__ import annotations
 
+import logging
 from copy import copy
 from typing import TYPE_CHECKING
 
@@ -41,15 +42,28 @@ class SuggestionManager(models.Manager["Suggestion"]):
         """Create new suggestion for this unit."""
         from weblate.auth.models import get_anonymous
 
+        log = logging.getLogger("gersona_debug")
+        log.debug("inside the Suggestion.add method")
+
         # Apply fixups
         fixups: list[str] = []
         if not unit.translation.is_template:
             target, fixups = fix_target(target, unit)
 
+        log.debug("fixups: %s", fixups)
+        log.debug("target: %s", target)
+
         target_merged = join_plural(target)
+
+        log.debug("target_merged: %s", target_merged)
 
         if user is None:
             user = request.user if request else get_anonymous()
+
+        log.debug("user : %s", user)
+        log.debug("unit.translated : %s", unit.translated)
+        log.debug("unit.target : %s", unit.target)
+        log.debug("raise_exception : %s", raise_exception)
 
         if unit.translated and unit.target == target_merged:
             if raise_exception:
