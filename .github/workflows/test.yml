@@ -30,14 +30,14 @@ jobs:
         requirements:
         - latest
         database:
-        - postgresql
+        - mysql
         experimental: [false]
-        include:
-        # Reduced testing for mysql
-        - python-version: '3.13'
-          requirements: latest
-          database: mysql
-          experimental: false
+        # include:
+        # # Reduced testing for mysql
+        # - python-version: '3.13'
+        #   requirements: latest
+        #   database: mysql
+        #   experimental: false
         # # Reduced testing for mariadb
         # - python-version: '3.13'
         #   requirements: latest

@@ -193,6 +193,8 @@ def addon_change(sender, change_ids: list[int], **kwargs) -> None:
 
     gers_logger = logging.getLogger("gersona.debug")
 
+    gers_logger.error(f">>>> CHANGES_IDS {change_ids}")  # noqa: G004
+
     def callback_wrapper(change: Change):
         def addon_callback(addon: Addon, component: Component) -> None:
             if change.action == 77:

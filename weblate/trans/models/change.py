@@ -238,7 +238,11 @@ class ChangeQuerySet(models.QuerySet["Change"]):
 
         Add processing to bulk creation.
         """
+        import logging
+
         from weblate.accounts.notifications import dispatch_changes_notifications
+
+        gers_logger = logging.getLogger("gersona.debug")
 
         changes = super().bulk_create(*args, **kwargs)
 
@@ -246,6 +250,7 @@ class ChangeQuerySet(models.QuerySet["Change"]):
         dispatch_changes_notifications(changes)
 
         # Executes post save to ensure messages are sent to fedora messaging
+        gers_logger.error("<<<<< bulk_create triggered")
         change_bulk_create.send(Change, instances=changes)
 
         # Store last content change in cache for improved performance

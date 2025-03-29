@@ -48,6 +48,9 @@ if TYPE_CHECKING:
 ADDONS = ClassLoader("WEBLATE_ADDONS", construct=False, base_class=BaseAddon)
 
 
+gers_logger = logging.getLogger("gersona.debug")
+
+
 class AddonQuerySet(models.QuerySet):
     def filter_for_execution(self, component):
         query = (
@@ -562,6 +565,7 @@ def bulk_change_create_handler(sender, instances: list[Change], **kwargs) -> Non
     """Handle Change bulk create signal."""
     from weblate.addons.tasks import addon_change
 
+    gers_logger.error("<<<<<< bulk_change_create_handler triggered")
     addon_change(sender, [change.pk for change in instances], **kwargs)
 
 
