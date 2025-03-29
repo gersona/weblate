@@ -6,6 +6,7 @@ import base64
 import hashlib
 import hmac
 import json
+import logging
 from datetime import UTC, datetime, timedelta
 from math import floor
 
@@ -19,6 +20,8 @@ from weblate_schemas import load_schema, validate_schema
 from weblate.addons.base import ChangeBaseAddon
 from weblate.addons.forms import WebhooksAddonForm
 from weblate.trans.util import split_plural
+
+GERS_LOGGER = logging.getLogger("gersona.debug")
 
 
 def hmac_data(key: bytes, data: bytes) -> bytes:
@@ -47,6 +50,7 @@ class WebhookAddon(ChangeBaseAddon):
 
     def change_event(self, change) -> None:
         """Deliver notification message."""
+        GERS_LOGGER.error(f"WebhookAddon.change_event {change}")  # noqa: G004
         config = self.instance.configuration
         if change.action in config["events"]:
             try:

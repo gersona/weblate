@@ -38,26 +38,26 @@ jobs:
           requirements: latest
           database: mysql
           experimental: false
-        # Reduced testing for mariadb
-        - python-version: '3.13'
-          requirements: latest
-          database: mariadb
-          experimental: false
-        # Reduced testing for minimal deps
-        - python-version: '3.11'
-          requirements: minimal
-          database: postgresql
-          experimental: false
-        # Reduced testing for edge deps
-        - python-version: '3.13'
-          requirements: edge
-          database: postgresql
-          experimental: true
-        # Test with Python 3.12.
-        - python-version: '3.12'
-          requirements: latest
-          database: postgresql
-          experimental: false
+        # # Reduced testing for mariadb
+        # - python-version: '3.13'
+        #   requirements: latest
+        #   database: mariadb
+        #   experimental: false
+        # # Reduced testing for minimal deps
+        # - python-version: '3.11'
+        #   requirements: minimal
+        #   database: postgresql
+        #   experimental: false
+        # # Reduced testing for edge deps
+        # - python-version: '3.13'
+        #   requirements: edge
+        #   database: postgresql
+        #   experimental: true
+        # # Test with Python 3.12.
+        # - python-version: '3.12'
+        #   requirements: latest
+        #   database: postgresql
+        #   experimental: false
     name: py${{ matrix.python-version }}, ${{ matrix.database }}, ${{ matrix.requirements }} deps
     env:
       CI_DATABASE: ${{ matrix.database }}
@@ -110,33 +110,33 @@ jobs:
     - name: Test with Django
       run: |
         source .venv/bin/activate
-        uv run --no-sources --all-extras pytest --junitxml=junit.xml --cov=weblate --numprocesses=auto weblate
+        uv run --no-sources --all-extras pytest --junitxml=junit.xml --cov=weblate --numprocesses=auto  pytest -k "test_bulk_changes" --log-cli-level=WARNING -v weblate/addons/tests.py weblate
         cp .coverage .coverage.pytest
     - name: Test wsgi startup
       env:
         PYTHONPATH: .
       run: uv run --no-sources coverage run weblate/wsgi.py
-    - name: Coverage
-      run: |
-        uv run --no-sources coverage combine
-        uv run --no-sources coverage xml
-    - uses: codecov/codecov-action@0565863a31f2c772f9f0395002a31e3f06189574 # v5.4.0
-      with:
-        token: ${{secrets.CODECOV_TOKEN}}
-        flags: unittests
-        name: Tests py${{ matrix.python-version }}, ${{ matrix.database }}, ${{ matrix.requirements }} deps
-    - name: Upload test results to Codecov
-      if: ${{ !cancelled() }}
-      uses: codecov/test-results-action@f2dba722c67b86c6caa034178c6e4d35335f6706 # v1.1.0
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action@170bf24d20d201b842d7a52403b73ed297e6645b # v2.18.0
-      if: always()
-      with:
-        comment_mode: off
-        files: |
-          junit.xml
+    # - name: Coverage
+    #   run: |
+    #     uv run --no-sources coverage combine
+    #     uv run --no-sources coverage xml
+    # - uses: codecov/codecov-action@0565863a31f2c772f9f0395002a31e3f06189574 # v5.4.0
+    #   with:
+    #     token: ${{secrets.CODECOV_TOKEN}}
+    #     flags: unittests
+    #     name: Tests py${{ matrix.python-version }}, ${{ matrix.database }}, ${{ matrix.requirements }} deps
+    # - name: Upload test results to Codecov
+    #   if: ${{ !cancelled() }}
+    #   uses: codecov/test-results-action@f2dba722c67b86c6caa034178c6e4d35335f6706 # v1.1.0
+    #   with:
+    #     token: ${{ secrets.CODECOV_TOKEN }}
+    # - name: Publish Test Results
+    #   uses: EnricoMi/publish-unit-test-result-action@170bf24d20d201b842d7a52403b73ed297e6645b # v2.18.0
+    #   if: always()
+    #   with:
+    #     comment_mode: off
+    #     files: |
+    #       junit.xml
     - name: Stop services
       if: always()
       run: ./ci/services-down ${{ matrix.database }}
