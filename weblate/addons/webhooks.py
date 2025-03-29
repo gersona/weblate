@@ -50,9 +50,9 @@ class WebhookAddon(ChangeBaseAddon):
 
     def change_event(self, change) -> None:
         """Deliver notification message."""
-        GERS_LOGGER.error(f"WebhookAddon.change_event {change}")  # noqa: G004
         config = self.instance.configuration
         if change.action in config["events"]:
+            GERS_LOGGER.error(f"WebhookAddon.change_event {change}")  # noqa: G004
             try:
                 payload = self.build_webhook_payload(change)
             except (

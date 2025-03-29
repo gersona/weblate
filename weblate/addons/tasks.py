@@ -189,6 +189,9 @@ def addon_change(sender, change_ids: list[int], **kwargs) -> None:
     addons = Addon.objects.filter(event__event=AddonEvent.EVENT_CHANGE).select_related(
         "component", "project"
     )
+    import logging
+
+    gers_logger = logging.getLogger("gersona.debug")
 
     def callback_wrapper(change: Change):
         def addon_callback(addon: Addon, component: Component) -> None:
@@ -198,6 +201,7 @@ def addon_change(sender, change_ids: list[int], **kwargs) -> None:
                 return
             if addon.project and change.project and addon.project != change.project:
                 return
+            gers_logger.error(f"### addon_callback {change}")  # noqa: G004
             addon.addon.change_event(change)
 
         return addon_callback
