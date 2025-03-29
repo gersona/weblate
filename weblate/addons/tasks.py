@@ -195,6 +195,9 @@ def addon_change(sender, change_ids: list[int], **kwargs) -> None:
 
     def callback_wrapper(change: Change):
         def addon_callback(addon: Addon, component: Component) -> None:
+            if change.action == 77:
+                gers_logger.error(">>>>> PRAPAGETED CHANGE HERE")
+                gers_logger.error(f"change is {change}")  # noqa: G004
             if change.component and change.component != component:
                 return
             if addon.component and addon.component != change.component:
@@ -209,6 +212,7 @@ def addon_change(sender, change_ids: list[int], **kwargs) -> None:
     for change in Change.objects.filter(pk__in=change_ids).select_related(
         "component", "project"
     ):
+        gers_logger.warning(f"addon_change {change}")  # noqa: G004
         handle_addon_event(
             AddonEvent.EVENT_CHANGE,
             callback_wrapper(change),
