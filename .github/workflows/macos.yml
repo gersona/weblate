@@ -53,8 +53,9 @@ jobs:
         brew link --force icu4c
     - name: install older version of LDC
       run: |
+        brew tap-new $USER/local-ldc
+        brew extract --version=1.28 ldc $USER/local-ldc
         brew install ldc@1.28
-        brew link --force --overwrite ldc@1.28
     - run: brew info ldc
     - name: Start services
       run: |
