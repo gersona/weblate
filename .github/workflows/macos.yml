@@ -51,11 +51,9 @@ jobs:
       run: |
         brew install mysql icu4c redis postgresql
         brew link --force icu4c
-    - name: install older version of LDC
-      run: |
-        brew tap-new $USER/local-ldc
-        brew extract --version=1.28 ldc $USER/local-ldc
-        brew install ldc@1.28
+    - run: brew uninstall ldc
+    - run: curl -O https://raw.githubusercontent.com/Homebrew/homebrew-core/044d871905b9ddef07a9a2612cc9ef9826aec376/Formula/ldc.rb && brew install ./ldc.rb
+    - run: rm ldc.rb
     - run: brew info ldc
     - name: Start services
       run: |
