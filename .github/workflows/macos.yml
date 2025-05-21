@@ -51,6 +51,10 @@ jobs:
       run: |
         brew install mysql icu4c redis postgresql
         brew link --force icu4c
+    - name: install older version of LDC
+      run: |
+        brew install ldc@1.28
+        brew link --force --overwrite ldc@1.28
     - run: brew info ldc
     - name: Start services
       run: |
@@ -60,7 +64,7 @@ jobs:
       run: |
         uv venv --python python3.13 .venv
         source .venv/bin/activate
-        uv sync --no-sources --frozen --all-extras --dev --no-binary-package lxml --no-binary-package xmlsec
+        uv sync --frozen --all-extras --dev --no-binary-package lxml --no-binary-package xmlsec
     - name: Test with Django
       run: |
         # shellcheck disable=SC2155
