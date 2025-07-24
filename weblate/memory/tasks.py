@@ -105,6 +105,8 @@ def update_memory(
     project_id: int,
     unit_state: int,
 ) -> None:
+    import sys
+
     from weblate.trans.models import Project
 
     project = Project.objects.get(pk=project_id)
@@ -113,6 +115,7 @@ def update_memory(
         not project.translation_review and unit_state >= STATE_TRANSLATED
     ):
         memory_status = Memory.STATUS_ACTIVE
+        sys.stdout.write("setting memory status to active\n")
         if project.autoclean_tm:
             # delete old entries, including those with different targets
             Memory.objects.filter(
@@ -139,6 +142,9 @@ def update_memory(
             source_language_id=source_language_id,
             target_language_id=target_language_id,
         ):
+            sys.stdout.write(f"found matching memory entry: {matching.id}\n")
+            sys.stdout.write(f"matching.target: {matching.target}\n")
+            sys.stdout.write(f"memory_status: {memory_status}\n")
             if matching.target == target and matching.status != memory_status:
                 matching.status = memory_status
                 to_update.append(matching)

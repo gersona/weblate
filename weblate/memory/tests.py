@@ -335,6 +335,10 @@ class MemoryModelTest(TransactionsTestMixin, FixtureTestCase):
         self.client.post(unit.translation.get_translate_url(), params, follow=True)
 
     def test_pending_memory_autoclean(self, autoclean_active: bool = False) -> None:
+        import sys
+
+        sys.stdout.write("##" * 20 + "\n")
+        sys.stdout.write("inside test_pending_memory_autoclean \n")
         import_memory(self.project.id)
         imported_memory_ids = [m.pk for m in Memory.objects.all()]
         initial_memory_count = len(imported_memory_ids)
@@ -381,8 +385,14 @@ class MemoryModelTest(TransactionsTestMixin, FixtureTestCase):
             ).count(),
         )
         suggestion = machine_translation.search(unit, "Hello, world!\n", None)[0]
+        # might be just a result ordering issue ?
+        sys.stdout.write("##" * 20 + "\n")
+        sys.stdout.write("suggestions result")
+        sys.stdout.write(
+            str(list(machine_translation.search(unit, "Hello, world!\n", None))) + "\n"
+        )
+        sys.stdout.write("##" * 20 + "\n")
         self.assertEqual(suggestion["quality"], 100)
-
         if not autoclean_active:
             # check that the other pending memory has not been deleted
             self.assertEqual(
