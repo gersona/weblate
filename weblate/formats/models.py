@@ -81,6 +81,8 @@ class FormatsConf(AppConf):
         "weblate.formats.ttkit.TSFormat",
         "weblate.formats.ttkit.XliffFormat",
         "weblate.formats.ttkit.RichXliffFormat",
+        "weblate.formats.ttkit.Xliff2Format",
+        "weblate.formats.ttkit.RichXliff2Format",
         "weblate.formats.ttkit.PoXliffFormat",
         "weblate.formats.ttkit.StringsFormat",
         "weblate.formats.ttkit.PropertiesFormat",
@@ -133,6 +135,10 @@ class FormatsConf(AppConf):
         "weblate.formats.ttkit.TBXFormat",
         "weblate.formats.ttkit.StringsdictFormat",
         "weblate.formats.ttkit.FluentFormat",
+        "weblate.formats.ttkit.GoI18nTOMLFormat",
+        "weblate.formats.ttkit.TOMLFormat",
+        "weblate.formats.ttkit.RESJSONFormat",
+        "weblate.formats.ttkit.NextcloudJSONFormat",
         "weblate.formats.multi.MultiCSVUtf8Format",
     )
 

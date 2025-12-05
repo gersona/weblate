@@ -11,6 +11,7 @@ Weblate 5.15
 * Added :http:get:`/api/units/(int:id)/comments/` to get a list of comments for the given translation unit.
 * Memory contents imported from TMX files include string context.
 * Encoding for :ref:`formats` can now be configured using :ref:`file_format_params` (e.g., ``csv_encoding``, ``properties_encoding``).
+* :doc:`/formats/xliff2`, :doc:`/formats/nextcloud-json`, :doc:`/formats/resjson`, and :doc:`/formats/toml` are now supported file formats.
 
 .. rubric:: Improvements
 
