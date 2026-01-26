@@ -33,9 +33,13 @@ jobs:
       DJANGO_SETTINGS_MODULE: weblate.settings_test
     steps:
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      if: github.event_name != 'pull_request'
+      if: github.event_name != 'pull_request' && github.repository_owner == 'WeblateOrg'
       with:
         token: ${{ secrets.WEBLATE_CI_TOKEN_WRONG }}
+        persist-credentials: true
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      if: github.event_name != 'pull_request' && github.repository_owner != 'WeblateOrg'
+      with:
         persist-credentials: true
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       if: github.event_name == 'pull_request'
