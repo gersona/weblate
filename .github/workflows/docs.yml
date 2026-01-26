@@ -64,7 +64,7 @@ jobs:
         pr-branch: create-pull-request/doc-snippets-update
         pr-labels: |
           dependencies
-        github-token: ${{ secrets.WEBLATE_CI_TOKEN }}
+        github-token: ${{ secrets.WEBLATE_CI_TOKEN_WRONG }}
 
   list-languages:
     runs-on: ubuntu-24.04
