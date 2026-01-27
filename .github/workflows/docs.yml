@@ -60,6 +60,7 @@ jobs:
     - name: Install Python dependencies
       run: ./ci/pip-install latest
     - run: make -C docs update-doc-snippets
+    - run: git diff
     - run: uv run --only-group pre-commit pre-commit run --all
       continue-on-error: true
 
