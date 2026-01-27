@@ -5437,7 +5437,19 @@ docs = [
 docs-snippets = [
     { name = "celery" },
     { name = "django", extra = ["argon2"] },
+    { name = "furo" },
+    { name = "jinja2" },
+    { name = "matplotlib" },
+    { name = "pillow" },
+    { name = "pygments" },
+    { name = "sphinx" },
+    { name = "sphinx-copybutton" },
+    { name = "sphinx-jsonschema" },
+    { name = "sphinx-reredirects" },
+    { name = "sphinxcontrib-httpdomain" },
+    { name = "sphinxext-opengraph" },
     { name = "translate-toolkit", extra = ["toml"] },
+    { name = "weblate-fonts" },
 ]
 lint = [
     { name = "pre-commit" },
@@ -5656,7 +5668,19 @@ docs = [
 docs-snippets = [
     { name = "celery", specifier = ">=5.5.3,<5.7" },
     { name = "django", extras = ["argon2"], specifier = ">=5.2,<6.1" },
+    { name = "furo", specifier = "==2025.12.19" },
+    { name = "jinja2", specifier = "==3.1.6" },
+    { name = "matplotlib", specifier = "==3.10.8" },
+    { name = "pillow", specifier = ">=11.0.0,<13" },
+    { name = "pygments", specifier = ">=2.19.0,<3.0" },
+    { name = "sphinx", specifier = "==8.2.3" },
+    { name = "sphinx-copybutton", specifier = "==0.5.2" },
+    { name = "sphinx-jsonschema", specifier = "==1.19.2" },
+    { name = "sphinx-reredirects", specifier = "==1.1.0" },
+    { name = "sphinxcontrib-httpdomain", specifier = "==1.8.1" },
+    { name = "sphinxext-opengraph", specifier = "==0.13.0" },
     { name = "translate-toolkit", extras = ["toml"], specifier = ">=3.18.1,<3.19" },
+    { name = "weblate-fonts", specifier = "==2026.1" },
 ]
 lint = [
     { name = "pre-commit", specifier = "==4.5.1" },
