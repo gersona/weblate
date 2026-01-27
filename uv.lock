@@ -5435,6 +5435,7 @@ docs = [
     { name = "weblate-fonts" },
 ]
 docs-snippets = [
+    { name = "celery" },
     { name = "django", extra = ["argon2"] },
     { name = "translate-toolkit", extra = ["toml"] },
 ]
@@ -5653,6 +5654,7 @@ docs = [
     { name = "weblate-fonts", specifier = "==2026.1" },
 ]
 docs-snippets = [
+    { name = "celery", specifier = ">=5.5.3,<5.7" },
     { name = "django", extras = ["argon2"], specifier = ">=5.2,<6.1" },
     { name = "translate-toolkit", extras = ["toml"], specifier = ">=3.18.1,<3.19" },
 ]
