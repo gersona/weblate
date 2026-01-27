@@ -22,6 +22,8 @@ permissions:
 jobs:
   update-snippets:
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
     env:
       CI_DATABASE: postgresql
       CI_REDIS_HOST: 127.0.0.1
